@@ -76,7 +76,7 @@ class StrongSORT(object):
             class_id = track.class_id
             conf = track.conf
             queue = track.q
-            outputs.append(np.array([x1, y1, x2, y2, track_id, class_id, conf, queue]))
+            outputs.append(np.array([x1, y1, x2, y2, track_id, class_id, conf, queue], dtype=object))
         if len(outputs) > 0:
             outputs = np.stack(outputs, axis=0)
         return outputs
@@ -145,7 +145,7 @@ class StrongSORT(object):
         # Add rectangle to image (PIL-only)
         for i, p in enumerate(q):
             thickness = int(np.sqrt(float (i + 1)) * 1.5)
-            if p[0] is 'observationupdate': 
+            if p[0] == 'observationupdate': 
                 cv2.circle(im0, p[1], 2, color=color, thickness=thickness)
             else:
                 cv2.circle(im0, p[1], 2, color=(255,255,255), thickness=thickness)
